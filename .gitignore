@@ -1,4 +1,10 @@
 target/
+dependency-reduced-pom.xml
+servers/
+versions/
+libraries/
+logs/
+assets/config.json
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

@@ -4,11 +4,8 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import io.github.codefarmerfox.luminaserverlauncher.app.App;
 
-/** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
-    static void main(String[] args) {
-        System.setProperty("java.library.path", "libs/natives");
-        System.setProperty("org.lwjgl.librarypath", "libs/natives");
+    public static void main(String[] args) {
         if (io.github.codefarmerfox.lwjgl3.StartupHelper.startNewJvmIfRequired()) return;
         createApplication();
     }
@@ -22,8 +19,7 @@ public class Lwjgl3Launcher {
         configuration.setTitle("LuminaServerLauncher");
         configuration.useVsync(true);
         configuration.setForegroundFPS(Lwjgl3ApplicationConfiguration.getDisplayMode().refreshRate + 1);
-        configuration.setWindowedMode(640, 480);
-        configuration.setWindowIcon("libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png");
+        configuration.setWindowedMode(1280, 720);
         return configuration;
     }
 }
