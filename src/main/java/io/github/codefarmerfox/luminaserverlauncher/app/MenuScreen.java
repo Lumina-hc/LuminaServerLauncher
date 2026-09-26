@@ -1,7 +1,7 @@
 package io.github.codefarmerfox.luminaserverlauncher.app;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx. ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,9 +23,16 @@ public class MenuScreen extends ScreenAdapter {
     private BitmapFont brandFont;
     private BitmapFont buttonFont;
     private BitmapFont smallFont;
+    private final boolean show;
+
+    public MenuScreen(App app, boolean show) {
+        this.app = app;
+        this.show = show;
+    }
 
     public MenuScreen(App app) {
         this.app = app;
+        this.show = false;
     }
 
     @Override
@@ -44,6 +51,13 @@ public class MenuScreen extends ScreenAdapter {
             buttonFont = new BitmapFont();
             smallFont = new BitmapFont();
         }
+        if (show) {
+            String last = app.getConfig() != null ? app.getConfig().lastServer : null;
+            if (last != null && !last.isEmpty()) {
+                app.setScreen(new ServerScreen(app, last));
+                return;
+            }
+        }
     }
 
     @Override
@@ -59,11 +73,11 @@ public class MenuScreen extends ScreenAdapter {
         boolean hoverServers = UI.hovered(centerX - BTN_W / 2f, y2, BTN_W, BTN_H);
 
         if (UI.clicked(centerX - BTN_W / 2f, y1, BTN_W, BTN_H)) {
-            app.setScreen(new VersionScreen(app, "vanilla"));
+            app.setScreen(new NewNameInputScreen(app));
             return;
         }
         if (UI.clicked(centerX - BTN_W / 2f, y2, BTN_W, BTN_H)) {
-            app.setScreen(new ServerScreen(app, "vanilla"));
+            app.setScreen(new ServerScreen(app, "原版核心"));
             return;
         }
 
@@ -78,9 +92,9 @@ public class MenuScreen extends ScreenAdapter {
 
         batch.begin();
         UI.text(brandFont, batch, "LuminaServerLauncher", centerX, h - 120, UI.TEXT_MAIN);
-        UI.text(smallFont, batch, "Minecraft server manager, simplified", centerX, h - 152, UI.TEXT_DIM);
-        UI.text(buttonFont, batch, "Download Vanilla Server", centerX, y1 + BTN_H / 2f);
-        UI.text(buttonFont, batch, "Open Server", centerX, y2 + BTN_H / 2f);
+        UI.text(smallFont, batch, "MC Server 管理器", centerX, h - 152, UI.TEXT_DIM);
+        UI.text(buttonFont, batch, "准备服务器", centerX, y1 + BTN_H / 2f);
+        UI.text(buttonFont, batch, "打开服务器", centerX, y2 + BTN_H / 2f);
         UI.text(smallFont, batch, "v0.2", centerX, 16, UI.TEXT_DIM);
         batch.end();
     }
